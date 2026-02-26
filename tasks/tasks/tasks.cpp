@@ -121,27 +121,20 @@ int main()
 {
 	SetConsoleCP(65001);
 	SetConsoleOutputCP(65001);
-	setlocale(LC_ALL, "Ukrainian");
 
-	srand(time(0));
+	srand((unsigned int)time(0));
 
 	int sizes[6] = { 10, 50, 800, 5000, 40000, 120000 };
 	const int runs = 3;
 
-	cout << "\nПОРІВНЯННЯ SYNC vs ASYNC (мкс)\n";
-	cout << "N"
-		<< "\t" << "Bub S"
-		<< "\t" << "Bub A"
-		<< "\t" << "Ins S"
-		<< "\t" << "Ins A"
-		<< "\t" << "Qui S"
-		<< "\t" << "Qui A"
-		<< endl;
+	cout << "\n+----------+-----------+-----------+-----------------------+" << endl;
+	cout << "|    N     |  Bubble   | Insertion |      Quick Sort       |" << endl;
+	cout << "|          |  (sync)   |  (sync)   |   Sync   |   Async    |" << endl;
+	cout << "+----------+-----------+-----------+----------+------------+" << endl;
 
 	for (int s = 0; s < 6; s++)
 	{
 		int n = sizes[s];
-
 		long long bS = 0, bA = 0, iS = 0, iA = 0, qS = 0, qA = 0;
 
 		for (int r = 0; r < runs; r++)
@@ -151,71 +144,67 @@ int main()
 
 			if (n <= 5000)
 			{
-				int* a1 = new int[n]; copyArray(original, a1, n);
-				int* a2 = new int[n]; copyArray(original, a2, n);
-
+				int* a1 = new int[n];
+				copyArray(original, a1, n);
+				int* a2 = new int[n];
+				copyArray(original, a2, n);
 				bS += measureSync(bubbleSort, a1, n);
 				bA += measureAsync(bubbleSort, a2, n);
-
 				delete[] a1; delete[] a2;
 
-				int* a3 = new int[n]; copyArray(original, a3, n);
-				int* a4 = new int[n]; copyArray(original, a4, n);
-
+				int* a3 = new int[n];
+				copyArray(original, a3, n);
+				int* a4 = new int[n];
+				copyArray(original, a4, n);
 				iS += measureSync(insertionSort, a3, n);
 				iA += measureAsync(insertionSort, a4, n);
-
 				delete[] a3; delete[] a4;
 			}
 
-			int* a5 = new int[n]; copyArray(original, a5, n);
-			int* a6 = new int[n]; copyArray(original, a6, n);
-
-			qS += measureSync([](int* arr, int n) {quickSort(arr, 0, n - 1);}, a5, n);
-			qA += measureAsync([](int* arr, int n) {quickSort(arr, 0, n - 1);}, a6, n);
-
+			int* a5 = new int[n];
+			copyArray(original, a5, n);
+			int* a6 = new int[n];
+			copyArray(original, a6, n);
+			qS += measureSync([](int* arr, int n) { quickSort(arr, 0, n - 1); }, a5, n);
+			qA += measureAsync([](int* arr, int n) { quickSort(arr, 0, n - 1); }, a6, n);
 			delete[] a5; delete[] a6;
 			delete[] original;
 		}
 
-		cout << n << " ";
-        if (n <= 5000) {
-           cout << "\t" << bS / runs << " "
-				<< "\t" << bA / runs << " "
-				<< "\t" << iS / runs << " "
-				<< "\t" << iA / runs << " ";
+		cout << "| " << left << setw(8) << n << " | ";
+		if (n <= 5000) {
+			cout << setw(9) << bS / runs << " | " << setw(9) << iS / runs << " | ";
 		}
 		else {
-        cout << "\t- \t - \t- \t- ";
+			cout << setw(9) << "---" << " | " << setw(9) << "---" << " | ";
 		}
-		cout << "\t" << qS / runs << "\t" << qA / runs << endl;
+		cout << setw(8) << qS / runs << " | " << setw(10) << qA / runs << " |" << endl;
+
 	}
+	cout << "+----------+-----------+-----------+----------+------------+" << endl;
 
-	int n = 50;
-	int* arr = new int[n];
-
-	generateArray(arr, n);
+	int search_n = 50;
+	int* search_arr = new int[search_n];
+	generateArray(search_arr, search_n);
 
 	cout << "\nПочатковий масив:\n";
-	printArray(arr, n);
+	printArray(search_arr, search_n);
 
-	quickSort(arr, 0, n - 1);
+	quickSort(search_arr, 0, search_n - 1);
 
 	cout << "\nВідсортований масив:\n";
-	printArray(arr, n);
+	printArray(search_arr, search_n);
 
 	int key;
-	cout << "\nВведіть число для пошуку: ";
+	cout << "\n>>> Введіть число для пошуку: ";
 	cin >> key;
 
-	int pos = binarySearch(arr, n, key);
-
+	int pos = binarySearch(search_arr, search_n, key);
 	if (pos != -1)
 		cout << "Елемент знайдено на позиції: " << pos << endl;
 	else
 		cout << "Елемент не знайдено\n";
 
-	delete[] arr;
-
+	delete[] search_arr;
 	return 0;
 }
