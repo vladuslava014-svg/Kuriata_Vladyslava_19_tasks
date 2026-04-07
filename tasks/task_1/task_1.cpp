@@ -122,6 +122,8 @@ int main()
 	SetConsoleCP(65001);
 	SetConsoleOutputCP(65001);
 
+	setlocale(LC_ALL, "Ukrainian");
+
 	srand((unsigned int)time(0));
 
 	int sizes[6] = { 10, 50, 800, 5000, 40000, 120000 };
@@ -187,23 +189,23 @@ int main()
 	int* search_arr = new int[search_n];
 	generateArray(search_arr, search_n);
 
-	cout << "\n–ü–æ—á–∞—Ç–∫–æ–≤–∏–π –º–∞—Å–∏–≤:\n";
+	cout << "\nœÓ˜‡ÚÍÓ‚ËÈ Ï‡ÒË‚:\n";
 	printArray(search_arr, search_n);
 
 	quickSort(search_arr, 0, search_n - 1);
 
-	cout << "\n–í—ñ–¥—Å–æ—Ä—Ç–æ–≤–∞–Ω–∏–π –º–∞—Å–∏–≤:\n";
+	cout << "\n¬≥‰ÒÓÚÓ‚‡ÌËÈ Ï‡ÒË‚:\n";
 	printArray(search_arr, search_n);
 
 	int key;
-	cout << "\n>>> –í–≤–µ–¥—ñ—Ç—å —á–∏—Å–ª–æ –¥–ª—è –ø–æ—à—É–∫—É: ";
+	cout << "\n>>> ¬‚Â‰≥Ú¸ ˜ËÒÎÓ ‰Îˇ ÔÓ¯ÛÍÛ: ";
 	cin >> key;
 
 	int pos = binarySearch(search_arr, search_n, key);
 	if (pos != -1)
-		cout << "–ï–ª–µ–º–µ–Ω—Ç –∑–Ω–∞–π–¥–µ–Ω–æ –Ω–∞ –ø–æ–∑–∏—Ü—ñ—ó: " << pos << endl;
+		cout << "≈ÎÂÏÂÌÚ ÁÌ‡È‰ÂÌÓ Ì‡ ÔÓÁËˆ≥ø: " << pos << endl;
 	else
-		cout << "–ï–ª–µ–º–µ–Ω—Ç –Ω–µ –∑–Ω–∞–π–¥–µ–Ω–æ\n";
+		cout << "≈ÎÂÏÂÌÚ ÌÂ ÁÌ‡È‰ÂÌÓ\n";
 
 	delete[] search_arr;
 	return 0;

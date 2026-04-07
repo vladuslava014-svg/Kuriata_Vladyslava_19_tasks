@@ -4,7 +4,7 @@ using namespace std;
 
 
 long long factorial(int n) {
-    if (n < 0) return 0; 
+    if (n < 0) return 0;
     long long res = 1;
     for (int i = 1; i <= n; i++) {
         res *= i;
@@ -13,7 +13,7 @@ long long factorial(int n) {
 }
 
 int main() {
-   
+
     int m = 4, n = 4;
 
     long long part1_top = factorial(2 * m);
