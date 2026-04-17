@@ -5,4 +5,7 @@
   </Configurations>
   <Project Path="task_1/task_1.vcxproj" Id="0eeb1ff8-b211-493c-9405-847f0c6ceba1" />
   <Project Path="task_2/task_2.vcxproj" Id="3e52ff4b-a7a4-4c6f-a9ad-f842c5eca904" />
+  <Project Path="task_3/task_3.vcxproj" Id="69c4aa97-1a15-4c09-8c46-3f472641dae4" />
+  <Project Path="task_4/task_4.vcxproj" Id="5bacd5e7-b46c-4638-bdc1-a5a7bb7b0e35" />
+  <Project Path="task_5/task_5.vcxproj" Id="df83e456-7c64-4c41-926e-affb6f4bffb4" />
 </Solution>
